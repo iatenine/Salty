@@ -13,4 +13,5 @@ public class Items extends HttpServlet {
         RequestDispatcher view = req.getRequestDispatcher("items.jsp");
         view.forward(req, resp);
     }
+
 }

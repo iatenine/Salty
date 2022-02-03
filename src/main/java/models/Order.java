@@ -1,5 +1,12 @@
 package models;
 
+/**
+ * Order
+ * Model representing orders table in db
+ * Represents a single order placed by a customer, referenced by customer_id
+ * Items are linked via a junction table
+ */
+
 public class Order {
     final private int id;
     final private int customer_id;
