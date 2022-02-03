@@ -1,18 +1,14 @@
 package models;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderTest {
+    Customer customer = new Customer(3, "Dale");
     int id = 1;
-    int customer_id = 2;
     long currTime = System.currentTimeMillis();
-    Order order = new Order(id, customer_id, currTime);
+    Order order = new Order(id, customer, currTime);
 
     @Test
     void getId() {
@@ -20,8 +16,9 @@ class OrderTest {
     }
 
     @Test
-    void getCustomer_id() {
-        assertEquals(customer_id, order.getCustomer_id());
+    void getCustomer() {
+        assertEquals(customer, order.getCustomer());
+        assertNotEquals(new Customer(4, "Peggy"), order.getCustomer());
     }
 
     @Test

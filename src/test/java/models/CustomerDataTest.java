@@ -21,8 +21,6 @@ class CustomerDataTest {
 
     @Test
     void getAddress() {
-        assertEquals("""
-    123 Elm St,
-    Anywhere, USA""", customerData.getAddress());
+        assertEquals("123 Elm St,\nAnywhere, USA", customerData.getAddress());
     }
 }

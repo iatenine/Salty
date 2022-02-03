@@ -8,8 +8,8 @@ class CustomerTest {
 
     int id = 1;
     String name = "Diane";
-    int fk_id = 4;
-    Customer customer = new Customer(id, name, fk_id);
+    CustomerData cd = new CustomerData(3, "", "");
+    Customer customer = new Customer(id, name, cd);
 
     @Test
     void getId() {
@@ -23,6 +23,6 @@ class CustomerTest {
 
     @Test
     void getCustomer_data_id() {
-        assertEquals(fk_id, customer.getCustomer_data_id());
+        assertEquals(cd, customer.getCustomer_data());
     }
 }
