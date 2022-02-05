@@ -7,15 +7,15 @@
 
   <servlet>
     <servlet-name>orders</servlet-name>
-    <servlet-class>servlets.Orders</servlet-class>
+    <servlet-class>controllers.Orders</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>items</servlet-name>
-    <servlet-class>servlets.Items</servlet-class>
+    <servlet-class>controllers.Items</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>customers</servlet-name>
-    <servlet-class>servlets.Customers</servlet-class>
+    <servlet-class>controllers.Customers</servlet-class>
   </servlet>
 
   <servlet-mapping>
