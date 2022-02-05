@@ -9,6 +9,7 @@ import repositories.CustomerDataRepo;
 import repositories.CustomerRepo;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,11 +63,8 @@ class CustomerServiceImplTest {
     void getCustomers() {
         Customer c1 = new Customer(mockId, "Ladybird", new CustomerData(3, "", ""));
         Customer c2 = new Customer(mockId + 1, "Bobby", new CustomerData(4, "", ""));
-        LinkedList<Customer> fetchedCustomers = new LinkedList<>();
-        fetchedCustomers.add(c1);
-        fetchedCustomers.add(c2);
         try {
-            Mockito.when(cr.getAll()).thenReturn(fetchedCustomers);
+            Mockito.when(cr.getAll()).thenReturn(new LinkedList<>(Arrays.asList(c1, c2)));
 
             assertEquals(mockId, custService.getCustomers().getFirst().getId());
             assertEquals(mockId+1, custService.getCustomers().getLast().getId());
