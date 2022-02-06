@@ -1,5 +1,6 @@
 package models;
 
+import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
