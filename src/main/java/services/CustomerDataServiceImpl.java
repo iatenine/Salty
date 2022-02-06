@@ -14,7 +14,7 @@ public class CustomerDataServiceImpl implements CustomerDataService {
     }
 
     @Override
-    public CustomerData saveCustomerData(CustomerData cd) {
+    public CustomerData saveCustomerData(CustomerData cd) throws SQLException {
         return repo.save(cd);
     }
 

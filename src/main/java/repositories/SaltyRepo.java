@@ -11,7 +11,7 @@ public abstract class SaltyRepo<T> {
     String tableName;
     String[] allCols = {"*"};
 
-    public abstract T save(T t);
+    public abstract T save(T t) throws SQLException;
     public abstract T getById(int id) throws SQLException;
 
     public abstract LinkedList<T> getAll() throws SQLException;
@@ -19,8 +19,14 @@ public abstract class SaltyRepo<T> {
         ResultSet rs = PepperORM.deleteRow(tableName, id);
         return null == rs;
     }
-    protected boolean exists(int t_id){
+    public boolean exists(int t_id) {
         ResultSet rs = PepperORM.getRow(tableName, t_id, allCols);
-        return null == rs;
+        try {
+            if(rs == null || !rs.next())
+                return false;
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
     }
 }

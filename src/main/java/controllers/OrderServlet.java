@@ -3,6 +3,7 @@ package controllers;
 import com.google.gson.Gson;
 import models.Item;
 import models.Order;
+import repositories.OrderRepo;
 import services.OrderServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +15,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class OrderServlet extends HttpServlet {
-    OrderServiceImpl os = new OrderServiceImpl();
+    OrderRepo or = new OrderRepo();
+    OrderServiceImpl os = new OrderServiceImpl(or);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

@@ -32,6 +32,7 @@ class CustomerDataServiceImplTest {
 
     @Test
     void saveCustomerData() {
+        try{
         Mockito.when(cdr.save(sampleData[0])).thenReturn(
                 sampleData[0]
         );
@@ -42,6 +43,10 @@ class CustomerDataServiceImplTest {
         assertEquals(sampleData[0], cds.saveCustomerData(sampleData[0]));
         assertEquals(sampleData[1], cds.saveCustomerData(sampleData[1]));
         assertNotEquals(fakeId, cds.saveCustomerData(sampleData[0]).getId());
+        } catch (SQLException e){
+            fail();
+            e.printStackTrace();
+        }
     }
 
     @Test
