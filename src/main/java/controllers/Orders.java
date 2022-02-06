@@ -1,6 +1,5 @@
 package controllers;
 
-import repositories.OrderRepo;
 import services.OrderServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -11,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Orders extends HttpServlet {
-    OrderRepo or = new OrderRepo();
-    OrderServiceImpl os = new OrderServiceImpl(or);
+
+    OrderServiceImpl os = new OrderServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

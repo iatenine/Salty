@@ -1,7 +1,6 @@
 package repositories;
 
 import ORM.PepperORM;
-import models.Order;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,6 @@ public abstract class SaltyRepo<T> {
 
     public abstract T save(T t);
     public abstract T getById(int id) throws SQLException;
-
     public abstract LinkedList<T> getAll() throws SQLException;
     public boolean delete(int id){
         ResultSet rs = PepperORM.deleteRow(tableName, id);
