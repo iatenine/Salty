@@ -37,7 +37,12 @@ public class CustomerDataRepo extends SaltyRepo<CustomerData>{
         LinkedList<CustomerData> list = new LinkedList<>();
         ResultSet rs = PepperORM.getRows(tableName, allCols);
         while(rs.next()){
-            list.add(buildCustomer(rs));
+            CustomerData item = new CustomerData(
+                    rs.getInt("id"),
+                    rs.getString("phone"),
+                    rs.getString("address")
+            );
+            list.add(item);
         }
 
         return list;

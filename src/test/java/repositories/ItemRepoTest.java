@@ -81,6 +81,9 @@ class ItemRepoTest {
             );
             assertEquals(test.getId(), test2.getId());
             assertEquals(40, test2.getPrice());
+        } catch (SQLException e) {
+            fail();
+            e.printStackTrace();
         } finally {
             PepperORM.deleteRow(tableName, id1);
         }
@@ -124,8 +127,10 @@ class ItemRepoTest {
         try {
             String[] allcols = {"*"};
             ResultSet rs = PepperORM.getRow(tableName, ret1.getId(), allcols);
-            assertEquals(ret1.getPrice(), repo.buildItem(rs).getPrice());
-            assertNotEquals(ret2.getId(), repo.buildItem(rs).getId());
+
+            Item test = repo.buildItem(rs);
+            assertEquals(ret1.getPrice(), test.getPrice());
+            assertNotEquals(ret2.getId(), test.getId());
         } catch (SQLException e) {
             fail();
             e.printStackTrace();

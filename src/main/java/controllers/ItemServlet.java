@@ -1,6 +1,7 @@
 package controllers;
 
 import com.google.gson.Gson;
+import lombok.SneakyThrows;
 import models.Item;
 import repositories.ItemRepo;
 import services.ItemServiceImpl;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ItemServlet extends HttpServlet {
     final private ItemRepo ir = new ItemRepo();
@@ -23,13 +25,15 @@ public class ItemServlet extends HttpServlet {
         view.forward(req, resp);
     }
 
+    @SneakyThrows
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         resp.getWriter().append(saveItem(req));
     }
 
+    @SneakyThrows
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) {
         resp.getWriter().append(saveItem(req));
     }
 
@@ -43,7 +47,7 @@ public class ItemServlet extends HttpServlet {
             resp.sendError(404, "No item found");
     }
 
-    protected String saveItem(HttpServletRequest req) throws IOException {
+    protected String saveItem(HttpServletRequest req) throws IOException, SQLException {
         BufferedReader reader = req.getReader();
         Gson gson = new Gson();
         Item i = gson.fromJson(reader, Item.class);

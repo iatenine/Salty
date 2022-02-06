@@ -22,7 +22,7 @@ class ItemServiceImplTest {
     Item item2 = new Item(2, "Fries", 2500, false);
 
     @Test
-    void saveItem() {
+    void saveItem() throws SQLException {
         Mockito.when(ir.save(item1)).thenReturn(item1);
         Mockito.when(ir.save(item2)).thenReturn(item2);
 

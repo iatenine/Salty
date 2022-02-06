@@ -8,7 +8,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -101,9 +103,32 @@ class CustomerDataRepoTest {
 
     @Test
     void getAll() {
+        try {
+            CustomerData test = repo.save(sampleData1);
+            assertNotNull(test);
+            id1 = test.getId();
+            LinkedList<CustomerData> list = repo.getAll();
+
+            assertEquals(id1, list.getLast().getId());
+            assertNotEquals(id1, list.getFirst().getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            PepperORM.deleteRow(tableName, id1);
+        }
     }
 
     @Test
     void buildCustomer() {
+        try {
+            String[] allcols = {"*"};
+            ResultSet rs = PepperORM.getRow(tableName, ret1.getId(), allcols);
+            CustomerData test = repo.buildCustomer(rs);
+            assertEquals(ret1.getAddress(), test.getAddress());
+            assertNotEquals(ret2.getId(), test.getId());
+        } catch (SQLException e) {
+            fail();
+            e.printStackTrace();
+        }
     }
 }
