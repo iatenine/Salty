@@ -15,7 +15,7 @@ public class CustomerRepo extends SaltyRepo<Customer> {
     @Override
     public Customer save(Customer customer) {
         int id = customer.getId();
-        if(exists(customer.getId())){
+        if(exists(customer.getId(), tableName)){
             id = PepperORM.addRow(tableName, customer.getCustomer_name(), customer.getCustomer_data());
         }
         else {

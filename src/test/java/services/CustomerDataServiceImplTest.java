@@ -32,6 +32,7 @@ class CustomerDataServiceImplTest {
 
     @Test
     void saveCustomerData() {
+        try{
         Mockito.when(cdr.save(sampleData[0])).thenReturn(
                 sampleData[0]
         );
@@ -42,6 +43,10 @@ class CustomerDataServiceImplTest {
         assertEquals(sampleData[0], cds.saveCustomerData(sampleData[0]));
         assertEquals(sampleData[1], cds.saveCustomerData(sampleData[1]));
         assertNotEquals(fakeId, cds.saveCustomerData(sampleData[0]).getId());
+        } catch (SQLException e){
+            fail();
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -75,9 +80,10 @@ class CustomerDataServiceImplTest {
 
     @Test
     void deleteCustomerData() {
-        Mockito.when(cdr.delete(mockId1)).thenReturn(true);
-        Mockito.when(cdr.delete(mockId2)).thenReturn(true);
-        Mockito.when(cdr.delete(fakeId)).thenReturn(false);
+        String tableName = "customers";
+        Mockito.when(cdr.delete(mockId1, tableName)).thenReturn(true);
+        Mockito.when(cdr.delete(mockId2, tableName)).thenReturn(true);
+        Mockito.when(cdr.delete(fakeId, tableName)).thenReturn(false);
 
         assertFalse(cds.deleteCustomerData(fakeId));
         assertTrue(cds.deleteCustomerData(mockId1));

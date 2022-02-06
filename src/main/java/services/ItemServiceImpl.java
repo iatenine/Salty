@@ -15,7 +15,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public Item saveItem(Item i) {
+    public Item saveItem(Item i) throws SQLException {
         return repo.save(i);
     }
 
@@ -31,6 +31,6 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public boolean delete(int id) {
-        return repo.delete(id);
+        return repo.delete(id, "items");
     }
 }

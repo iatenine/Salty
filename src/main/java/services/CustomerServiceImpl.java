@@ -40,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public boolean deleteCustomer(int id) {
-        return cr.delete(id);
+        return cr.delete(id, "customers");
     }
 
     private Customer populateCustomerData(Customer c) throws SQLException {

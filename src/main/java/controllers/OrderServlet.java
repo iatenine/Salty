@@ -13,13 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.LinkedList;
 
 public class OrderServlet extends HttpServlet {
     OrderRepo or = new OrderRepo();
     OrderServiceImpl os = new OrderServiceImpl(or);
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -30,13 +27,6 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.getWriter().append(saveOrder(req));
-        try {
-            LinkedList<Order> orders = or.getAll();
-            req.setAttribute("orders", orders);
-            req.getRequestDispatcher("orders.jsp").forward(req, resp);
-        } catch (SQLException | ServletException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

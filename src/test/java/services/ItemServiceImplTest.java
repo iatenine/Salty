@@ -22,7 +22,7 @@ class ItemServiceImplTest {
     Item item2 = new Item(2, "Fries", 2500, false);
 
     @Test
-    void saveItem() {
+    void saveItem() throws SQLException {
         Mockito.when(ir.save(item1)).thenReturn(item1);
         Mockito.when(ir.save(item2)).thenReturn(item2);
 
@@ -62,9 +62,10 @@ class ItemServiceImplTest {
 
     @Test
     void delete() {
-        Mockito.when(ir.delete(3)).thenReturn(true);
-        Mockito.when(ir.delete(2)).thenReturn(true);
-        Mockito.when(ir.delete(400)).thenReturn(false);
+        String tableName = "items";
+        Mockito.when(ir.delete(3, tableName)).thenReturn(true);
+        Mockito.when(ir.delete(2, tableName)).thenReturn(true);
+        Mockito.when(ir.delete(400, tableName)).thenReturn(false);
 
         assertTrue(is.delete(2));
         assertTrue(is.delete(3));

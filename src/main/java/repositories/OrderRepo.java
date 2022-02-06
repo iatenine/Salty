@@ -10,13 +10,14 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class OrderRepo extends SaltyRepo<Order> {
+    String tableName = "orders";
 
     @Override
     public Order save(Order order) {
 
         int id = order.getId();
-        if (exists(order.getId())) {
-            id = PepperORM.addRow(tableName, order.getId(), order.getCustomer(), order.getDate());
+        if (exists(order.getId(), tableName)) {
+            id = PepperORM.addRow(tableName, order.getId(),order.getCustomer(), order.getDate());
         } else {
             HashMap<String, Object> newCols = new HashMap<>();
             newCols.put("order_customer", order.getCustomer());
@@ -36,7 +37,6 @@ public class OrderRepo extends SaltyRepo<Order> {
         long date = rs.getLong("date");
         return new Order(id, customer, date);
     }
-
     @Override
     public LinkedList<Order> getAll() throws SQLException {
 
@@ -55,4 +55,5 @@ public class OrderRepo extends SaltyRepo<Order> {
         return list;
 
     }
+
 }

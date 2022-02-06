@@ -14,7 +14,7 @@ public class CustomerDataServiceImpl implements CustomerDataService {
     }
 
     @Override
-    public CustomerData saveCustomerData(CustomerData cd) {
+    public CustomerData saveCustomerData(CustomerData cd) throws SQLException {
         return repo.save(cd);
     }
 
@@ -30,6 +30,6 @@ public class CustomerDataServiceImpl implements CustomerDataService {
 
     @Override
     public boolean deleteCustomerData(int id) {
-        return repo.delete(id);
+        return repo.delete(id, "customer_data");
     }
 }
