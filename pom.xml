@@ -6,7 +6,7 @@
 
   <groupId>com.salty</groupId>
   <artifactId>salty</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1</version>
   <packaging>war</packaging>
 
   <name>salty Maven Webapp</name>
@@ -19,11 +19,7 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>com.saltypos</groupId>
-      <artifactId>PepperORM</artifactId>
-      <version>1.0</version>
-    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
