@@ -62,6 +62,19 @@
       <artifactId>log4j-core</artifactId>
       <version>2.17.0</version>
     </dependency>
+    <dependency>
+      <groupId>eu.clarussecure</groupId>
+      <artifactId>CLARUS-ARM</artifactId>
+      <version>1.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.opengroup</groupId>
+      <artifactId>ARM_4_0</artifactId>
+      <version>1.0</version>
+      <scope>compile</scope>
+    </dependency>
+
 
   </dependencies>
 
