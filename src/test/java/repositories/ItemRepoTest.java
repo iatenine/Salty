@@ -1,7 +1,6 @@
 package repositories;
 
 import ORM.PepperORM;
-import models.CustomerData;
 import models.Item;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -64,6 +63,27 @@ class ItemRepoTest {
 
     @Test
     void save() {
+        try {
+            Item test = repo.save(sampleData1);
+            assertNotNull(test);
+            id1 = test.getId();
+
+            assertNotEquals(test.getId(), sampleData1.getId());
+            assertEquals(test.getPrice(), sampleData1.getPrice());
+
+            Item test2 = repo.save(
+                    new Item(
+                            test.getId(),
+                            "",
+                            40,
+                            true
+                    )
+            );
+            assertEquals(test.getId(), test2.getId());
+            assertEquals(40, test2.getPrice());
+        } finally {
+            PepperORM.deleteRow(tableName, id1);
+        }
     }
 
     @Test

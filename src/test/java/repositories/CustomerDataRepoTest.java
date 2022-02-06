@@ -2,7 +2,7 @@ package repositories;
 
 import ORM.PepperORM;
 import models.CustomerData;
-import org.checkerframework.checker.units.qual.C;
+import models.Item;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +20,7 @@ class CustomerDataRepoTest {
     CustomerData sampleData2 = new CustomerData("987654321", "321 Anywhere Ln");
     CustomerData ret1 = null;
     CustomerData ret2 = null;
-    CustomerDataRepo cdr = new CustomerDataRepo();
+    CustomerDataRepo repo = new CustomerDataRepo();
 
     @BeforeAll
     static void setup(){
@@ -59,13 +59,37 @@ class CustomerDataRepoTest {
 
     @Test
     void save() {
+        try {
+            CustomerData test = repo.save(sampleData1);
+            assertNotNull(test);
+            id1 = test.getId();
+
+            assertNotEquals(test.getId(), sampleData1.getId());
+            assertEquals(test.getAddress(), sampleData1.getAddress());
+
+            CustomerData test2 = repo.save(
+                    new CustomerData(
+                            test.getId(),
+                            "8675309",
+                            "123 Nowhereville"
+                    )
+            );
+            assertEquals(test.getId(), test2.getId());
+            assertEquals("123 Nowhereville", test2.getAddress());
+        } catch (SQLException e) {
+            fail();
+            e.printStackTrace();
+        } finally {
+            PepperORM.deleteRow(tableName, id1);
+        }
+
     }
 
     @Test
     void getById() {
         try{
-        CustomerData test1 = cdr.getById(ret1.getId());
-        CustomerData test2 = cdr.getById(ret2.getId());
+        CustomerData test1 = repo.getById(ret1.getId());
+        CustomerData test2 = repo.getById(ret2.getId());
 
         assertEquals(test1.getId(), ret1.getId());
         assertNotEquals(test2.getId(), ret1.getId());
