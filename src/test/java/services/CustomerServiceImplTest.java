@@ -80,8 +80,9 @@ class CustomerServiceImplTest {
 
     @Test
     void deleteCustomer() {
-        Mockito.when(cr.delete(mockId)).thenReturn(true);
-        Mockito.when(cr.delete(383982839)).thenReturn(false);
+        String tableName = "cusomters";
+        Mockito.when(cr.delete(mockId, tableName)).thenReturn(true);
+        Mockito.when(cr.delete(383982839, tableName)).thenReturn(false);
 
         assertTrue(custService.deleteCustomer(mockId));
         assertFalse(custService.deleteCustomer(383982839));

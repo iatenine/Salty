@@ -15,12 +15,11 @@ public class CustomerDataRepo extends SaltyRepo<CustomerData>{
     @Override
     public CustomerData save(CustomerData customerData) throws SQLException {
         // Update only if already exists
-        if(exists(customerData.getId())){
+        if(exists(customerData.getId(), tableName)){
             HashMap<String, Object> colmuns = new HashMap<>();
             colmuns.put("phone", customerData.getPhone());
             colmuns.put("address", customerData.getAddress());
             ResultSet rs = PepperORM.updateRow(tableName, customerData.getId(), colmuns);
-            rs.next();
             return buildCustomer(rs);
         }
         int id = PepperORM.addRow(tableName, customerData.getPhone(), customerData.getAddress());

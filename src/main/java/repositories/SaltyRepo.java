@@ -8,18 +8,17 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 public abstract class SaltyRepo<T> {
-    String tableName;
     String[] allCols = {"*"};
 
     public abstract T save(T t) throws SQLException;
     public abstract T getById(int id) throws SQLException;
 
     public abstract LinkedList<T> getAll() throws SQLException;
-    public boolean delete(int id){
+    public boolean delete(int id, String tableName){
         ResultSet rs = PepperORM.deleteRow(tableName, id);
         return null == rs;
     }
-    public boolean exists(int t_id) {
+    public boolean exists(int t_id, String tableName) {
         ResultSet rs = PepperORM.getRow(tableName, t_id, allCols);
         try {
             if(rs == null || !rs.next())

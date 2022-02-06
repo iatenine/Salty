@@ -1,15 +1,10 @@
 package services;
 
 import models.Order;
-import repositories.CustomerDataRepo;
-import repositories.CustomerRepo;
 import repositories.OrderRepo;
 
-import java.lang.reflect.Array;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -39,6 +34,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean deleteOrder(int id) {
-        return or.delete(id);
+        return or.delete(id, "orders");
     }
 }

@@ -80,9 +80,10 @@ class CustomerDataServiceImplTest {
 
     @Test
     void deleteCustomerData() {
-        Mockito.when(cdr.delete(mockId1)).thenReturn(true);
-        Mockito.when(cdr.delete(mockId2)).thenReturn(true);
-        Mockito.when(cdr.delete(fakeId)).thenReturn(false);
+        String tableName = "customers";
+        Mockito.when(cdr.delete(mockId1, tableName)).thenReturn(true);
+        Mockito.when(cdr.delete(mockId2, tableName)).thenReturn(true);
+        Mockito.when(cdr.delete(fakeId, tableName)).thenReturn(false);
 
         assertFalse(cds.deleteCustomerData(fakeId));
         assertTrue(cds.deleteCustomerData(mockId1));

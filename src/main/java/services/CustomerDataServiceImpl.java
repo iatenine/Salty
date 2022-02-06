@@ -30,6 +30,6 @@ public class CustomerDataServiceImpl implements CustomerDataService {
 
     @Override
     public boolean deleteCustomerData(int id) {
-        return repo.delete(id);
+        return repo.delete(id, "customer_data");
     }
 }

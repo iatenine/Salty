@@ -62,9 +62,10 @@ class ItemServiceImplTest {
 
     @Test
     void delete() {
-        Mockito.when(ir.delete(3)).thenReturn(true);
-        Mockito.when(ir.delete(2)).thenReturn(true);
-        Mockito.when(ir.delete(400)).thenReturn(false);
+        String tableName = "items";
+        Mockito.when(ir.delete(3, tableName)).thenReturn(true);
+        Mockito.when(ir.delete(2, tableName)).thenReturn(true);
+        Mockito.when(ir.delete(400, tableName)).thenReturn(false);
 
         assertTrue(is.delete(2));
         assertTrue(is.delete(3));

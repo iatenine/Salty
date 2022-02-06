@@ -36,7 +36,7 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int id = Integer.parseInt(req.getQueryString());
-        boolean success = ir.delete(id);
+        boolean success = ir.delete(id, "items");
         if(success)
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         else

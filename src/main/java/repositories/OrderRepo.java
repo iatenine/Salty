@@ -10,12 +10,13 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class OrderRepo extends SaltyRepo<Order> {
+    String tableName = "orders";
 
     @Override
     public Order save(Order order) {
 
         int id = order.getId();
-        if (exists(order.getId())) {
+        if (exists(order.getId(), tableName)) {
             id = PepperORM.addRow(tableName, order.getId(),order.getCustomer(), order.getDate());
         } else {
             HashMap<String, Object> newCols = new HashMap<>();

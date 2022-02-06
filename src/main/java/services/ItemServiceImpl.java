@@ -31,6 +31,6 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public boolean delete(int id) {
-        return repo.delete(id);
+        return repo.delete(id, "items");
     }
 }
