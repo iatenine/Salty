@@ -49,7 +49,6 @@ class CustomerDataRepoTest {
 
         assertEquals(sampleData2.getPhone(), ret2.getPhone());
         assertEquals(sampleData1.getAddress(), ret1.getAddress());
-
     }
 
     @AfterEach
