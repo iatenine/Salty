@@ -10,7 +10,7 @@ public class ItemServiceImpl implements ItemService{
 
     final private ItemRepo repo;
 
-    ItemServiceImpl(ItemRepo repo){
+    public ItemServiceImpl(ItemRepo repo){
         this.repo = repo;
     }
 

@@ -13,7 +13,7 @@ class OrderRepoTest {
     void save() {
         // This should be overwritten later
         // For now it serves to test the build config in AWS CodeBuild is working as expected
-        PepperORM.connect();
+        assertTrue(PepperORM.connect());
         HashMap<String, Class> columns = new HashMap<>();
         columns.put("name", String.class);
         columns.put("price", Integer.class);
