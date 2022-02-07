@@ -2,6 +2,9 @@ package controllers;
 
 import com.google.gson.Gson;
 import models.Customer;
+import models.CustomerData;
+import models.Item;
+import models.Order;
 import repositories.CustomerDataRepo;
 import repositories.CustomerRepo;
 import services.CustomerServiceImpl;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class CustomerServlet extends HttpServlet {
     CustomerRepo cr = new CustomerRepo();
@@ -21,6 +25,14 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CustomerData data1 = new CustomerData("8508675309", "987654321");
+        Customer customer1 = new  Customer(42, "Hank Hill", data1);
+        Customer customer2 = new Customer("Peggy Hill");
+
+        LinkedList<Customer> list = new LinkedList<>();
+        list.add(customer1);
+        list.add(customer2);
+        req.setAttribute("list", list);
         RequestDispatcher view = req.getRequestDispatcher("customers.jsp");
         view.forward(req, resp);
     }

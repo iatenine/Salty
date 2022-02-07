@@ -23,7 +23,14 @@ public class ItemServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        LinkedList<Item> list = is.getItems();
+//        LinkedList<Item> list = is.getItems();
+        LinkedList<Item> list = new LinkedList<>();
+        Item item1 = new Item("Steak", 405, false);
+        Item item2 = new Item("Fries", 2500, true);
+
+        list.add(item1);
+        list.add(item2);
+
         req.setAttribute("list", list);
         RequestDispatcher view = req.getRequestDispatcher("items.jsp");
         view.forward(req, resp);

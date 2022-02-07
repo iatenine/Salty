@@ -16,7 +16,7 @@
        for(Item item : list){
         out.println("<div>");
         out.println("<input type='text' value='"+ item.getName() +"'/>");
-        out.println("<input type='number' placeholder='13.00' step='0.01' value='" + item.getPrice() + "'/>");
+        out.println("<input type='number' placeholder='13.00' step='0.01' value='" + Double.valueOf(item.getPrice()/100) + "'/>");
         out.println("<input type='checkbox' value='" + item.isAvailable() + "true' />");
         out.println("<button>Update</button>");
         out.println("</div>");

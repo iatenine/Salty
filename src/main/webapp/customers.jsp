@@ -12,13 +12,17 @@
 <hr />
     <div>
     <%
-       LinkedList<Item> list = (LinkedList<Item>) request.getAttribute("list");
-       for(Item item : list){
+       LinkedList<Customer> list = (LinkedList<Customer>) request.getAttribute("list");
+       for(Customer customer : list){
         out.println("<div>");
-        out.println("<input type='text' value='"+ item.getName() +"'/>");
-        out.println("<input type='number' placeholder='13.00' step='0.01' value='" + item.getPrice() + "'/>");
-        out.println("<input type='checkbox' value='" + item.isAvailable() + "true' />");
-        out.println(item.getCustomer().getName());
+        out.println("<input type='text' value='"+ customer.getCustomer_name() +"'/>");
+        if(customer.getCustomer_data() != null){
+            out.println(customer.getCustomer_data().getPhone());
+            out.println(customer.getCustomer_data().getAddress());
+        } else{
+            out.println("N/A");
+            out.println("N/A");
+        }
         out.println("<button>Update</button>");
         out.println("</div>");
        }
