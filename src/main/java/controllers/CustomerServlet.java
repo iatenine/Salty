@@ -28,10 +28,7 @@ public class CustomerServlet extends HttpServlet {
         //"MockDB"
     static LinkedList<Customer> list = new LinkedList<>();
 
-    public static void main(String[] args) {
 
-
-    }
 
     @SneakyThrows
     @Override

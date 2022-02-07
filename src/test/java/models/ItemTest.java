@@ -1,10 +1,18 @@
 package models;
 
+import ORM.PepperORM;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ItemTest {
+
+    // Pepper Demo Test
+//    public static void main(String[] args) {
+//        PepperORM.dropTable("customers_orders");
+//        PepperORM.create1ToManyRelationship("customers", "orders");
+//        PepperORM.createManyToManyRelationship("orders", "items");
+//    }
 
     int id = 1;
     String name = "Spaghetti";
