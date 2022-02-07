@@ -14,13 +14,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class ItemServlet extends HttpServlet {
     final private ItemRepo ir = new ItemRepo();
     final private ItemServiceImpl is = new ItemServiceImpl(ir);
 
+    @SneakyThrows
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+//        LinkedList<Item> list = is.getItems();
+        LinkedList<Item> list = new LinkedList<>();
+        Item item1 = new Item("Steak", 405, false);
+        Item item2 = new Item("Fries", 2500, true);
+
+        list.add(item1);
+        list.add(item2);
+
+        req.setAttribute("list", list);
         RequestDispatcher view = req.getRequestDispatcher("items.jsp");
         view.forward(req, resp);
     }

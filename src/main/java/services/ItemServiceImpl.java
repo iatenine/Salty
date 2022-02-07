@@ -4,6 +4,7 @@ import models.Item;
 import repositories.ItemRepo;
 
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ItemServiceImpl implements ItemService{
@@ -25,7 +26,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public List<Item> getItems() throws SQLException {
+    public LinkedList<Item> getItems() throws SQLException {
         return repo.getAll();
     }
 
