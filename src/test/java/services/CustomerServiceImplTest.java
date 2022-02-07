@@ -80,7 +80,7 @@ class CustomerServiceImplTest {
 
     @Test
     void deleteCustomer() {
-        String tableName = "cusomters";
+        String tableName = "customers";
         Mockito.when(cr.delete(mockId, tableName)).thenReturn(true);
         Mockito.when(cr.delete(383982839, tableName)).thenReturn(false);
 

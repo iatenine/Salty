@@ -23,11 +23,6 @@ class ItemRepoTest {
     Item ret2 = null;
     ItemRepo repo = new ItemRepo();
 
-    @BeforeAll
-    static void setup(){
-        assertTrue(PepperORM.connect());
-    }
-
     @BeforeEach
     void addRows(){
         ret1 = new Item(
@@ -109,9 +104,9 @@ class ItemRepoTest {
             Item test = repo.save(sampleData1);
             assertNotNull(test);
             id1 = test.getId();
-            LinkedList<Item> list = repo.getAll();
 
-            assertEquals(id1, list.getLast().getId());
+            LinkedList<Item> list = repo.getAll();
+            assertNotEquals(0, list.size());
             assertNotEquals(id1, list.getFirst().getId());
         } catch (SQLException e) {
             e.printStackTrace();

@@ -9,7 +9,6 @@ class CustomerRepoTest {
 
     @Test
     void save() {
-        assertTrue(PepperORM.connect());
     }
 
     @Test

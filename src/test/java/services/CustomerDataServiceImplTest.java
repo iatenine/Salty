@@ -80,7 +80,7 @@ class CustomerDataServiceImplTest {
 
     @Test
     void deleteCustomerData() {
-        String tableName = "customers";
+        String tableName = "customer_data";
         Mockito.when(cdr.delete(mockId1, tableName)).thenReturn(true);
         Mockito.when(cdr.delete(mockId2, tableName)).thenReturn(true);
         Mockito.when(cdr.delete(fakeId, tableName)).thenReturn(false);

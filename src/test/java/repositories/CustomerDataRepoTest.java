@@ -24,11 +24,6 @@ class CustomerDataRepoTest {
     CustomerData ret2 = null;
     CustomerDataRepo repo = new CustomerDataRepo();
 
-    @BeforeAll
-    static void setup(){
-        assertTrue(PepperORM.connect());
-    }
-
     @BeforeEach
     void addRows(){
         ret1 = new CustomerData(

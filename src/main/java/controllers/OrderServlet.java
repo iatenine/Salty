@@ -19,23 +19,14 @@ import java.util.LinkedList;
 public class OrderServlet extends HttpServlet {
     OrderRepo or = new OrderRepo();
     OrderServiceImpl os = new OrderServiceImpl(or);
+    LinkedList<Order> list = new LinkedList<>();
+    LinkedList<Item> items = new LinkedList<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Customer customer1 = new  Customer("Hank Hill");
-        Customer customer2 = new Customer("Peggy Hill");
         Item item1 = new Item("Steak", 400, true);
         Item item2 = new Item("Fries", 2500, false);
-        LinkedList<Order> list = new LinkedList<>();
-        LinkedList<Item> items = new LinkedList<>();
-        items.add(item1);
-        items.add(item2);
-
-        list.add(new Order(
-                customer1,
-                System.currentTimeMillis(),
-                items
-        ));
         req.setAttribute("list", list);
         RequestDispatcher view = req.getRequestDispatcher("orders.jsp");
         view.forward(req, resp);
@@ -65,6 +56,8 @@ public class OrderServlet extends HttpServlet {
         BufferedReader reader = req.getReader();
         Gson gson = new Gson();
         Order o = gson.fromJson(reader, Order.class);
-        return gson.toJson(os.saveOrder(o));
+        list.add(o);
+//        return gson.toJson(os.saveOrder(o));
+        return gson.toJson(o);
     }
 }
