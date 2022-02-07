@@ -1,3 +1,5 @@
+<%@ page import ="java.util.LinkedList, models.*" %>
+
 <html>
 <body>
 <%@ include file="header.jsp"%>
@@ -16,6 +18,7 @@
         out.println("<input type='text' value='"+ item.getName() +"'/>");
         out.println("<input type='number' placeholder='13.00' step='0.01' value='" + item.getPrice() + "'/>");
         out.println("<input type='checkbox' value='" + item.isAvailable() + "true' />");
+        out.println(item.getCustomer().getName());
         out.println("<button>Update</button>");
         out.println("</div>");
        }

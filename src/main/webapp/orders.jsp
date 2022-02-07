@@ -1,3 +1,5 @@
+<%@ page import ="java.util.LinkedList, models.*" %>
+
 <html>
 <body>
 <%@ include file="header.jsp"%>
@@ -12,9 +14,15 @@
        // Date
        // total
         out.println("<div>");
-        out.println("<span>"+ order.getId() +"'</span>");
-        out.println("<span>" + order.getDate() + "'</span>");
-        out.println("<button>Update</button>");
+        out.println("<span> Order # "+ order.getId() +"</span>");
+        out.println("<span> Placed on: " + order.getDateString() + "</span>");
+        out.println("Items: ");
+        for(Item item : order.getItems()){
+            out.print(item.getName());
+            if(item != order.getItems().getLast())
+            out.println(",");
+        }
+        out.println("<button>Delete Order</button>");
         out.println("</div>");
        }
     %>
