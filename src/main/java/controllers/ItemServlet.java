@@ -19,12 +19,12 @@ import java.util.LinkedList;
 public class ItemServlet extends HttpServlet {
     final private ItemRepo ir = new ItemRepo();
     final private ItemServiceImpl is = new ItemServiceImpl(ir);
+    LinkedList<Item> list = new LinkedList<>();
 
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 //        LinkedList<Item> list = is.getItems();
-        LinkedList<Item> list = new LinkedList<>();
         Item item1 = new Item("Steak", 405, false);
         Item item2 = new Item("Fries", 2500, true);
 
@@ -50,6 +50,7 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        // Can't get past 403 errors on delete paths
         int id = Integer.parseInt(req.getQueryString());
         boolean success = ir.delete(id, "items");
         if(success)
@@ -58,10 +59,13 @@ public class ItemServlet extends HttpServlet {
             resp.sendError(404, "No item found");
     }
 
-    protected String saveItem(HttpServletRequest req) throws IOException, SQLException {
+    protected String saveItem(HttpServletRequest req) throws IOException {
         BufferedReader reader = req.getReader();
         Gson gson = new Gson();
         Item i = gson.fromJson(reader, Item.class);
-        return gson.toJson(is.saveItem(i));
+        list.add(i);
+//        return gson.toJson(is.saveItem(i));
+        return gson.toJson(i);
+
     }
 }

@@ -1,10 +1,10 @@
 package controllers;
 
+import ORM.PepperORM;
 import com.google.gson.Gson;
+import lombok.SneakyThrows;
 import models.Customer;
 import models.CustomerData;
-import models.Item;
-import models.Order;
 import repositories.CustomerDataRepo;
 import repositories.CustomerRepo;
 import services.CustomerServiceImpl;
@@ -16,22 +16,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 public class CustomerServlet extends HttpServlet {
     CustomerRepo cr = new CustomerRepo();
     CustomerDataRepo cdr = new CustomerDataRepo();
     CustomerServiceImpl cs = new CustomerServiceImpl(cr, cdr);
 
+        //"MockDB"
+    static LinkedList<Customer> list = new LinkedList<>();
+
+    public static void main(String[] args) {
+
+
+    }
+
+    @SneakyThrows
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         CustomerData data1 = new CustomerData("8508675309", "987654321");
         Customer customer1 = new  Customer(42, "Hank Hill", data1);
-        Customer customer2 = new Customer("Peggy Hill");
-
-        LinkedList<Customer> list = new LinkedList<>();
+        Customer customer2 = new Customer(2, "Peggy Hill");
         list.add(customer1);
         list.add(customer2);
+//        LinkedList<Customer> list = cs.getCustomers();
         req.setAttribute("list", list);
         RequestDispatcher view = req.getRequestDispatcher("customers.jsp");
         view.forward(req, resp);
@@ -45,24 +55,32 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+//        Gson gson = new Gson();
+//        BufferedReader reader = req.getReader();
+//        Customer newCustomer = gson.fromJson(reader, Customer.class);
+//        list.removeIf((x->x.getId()==newCustomer.getId()));
         resp.getWriter().append(saveCustomer(req));
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int id = Integer.parseInt(req.getQueryString());
-        boolean success = cs.deleteCustomer(id);
+//        resp.getWriter().append("hi" + id);
+//        boolean success = cs.deleteCustomer(id);
+        boolean success = list.stream().anyMatch((elem)-> elem.getId() == id);
         if(success)
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         else
-            resp.sendError(404, "No item found");
+            resp.getWriter().append("No");
     }
 
     protected String saveCustomer(HttpServletRequest req) throws IOException {
         BufferedReader reader = req.getReader();
         Gson gson = new Gson();
         Customer c = gson.fromJson(reader, Customer.class);
-        return gson.toJson(cs.saveCustomer(c));
+        list.add(c);
+//        return gson.toJson(cs.saveCustomer(c));
+        return gson.toJson(c);
     }
 
 }
